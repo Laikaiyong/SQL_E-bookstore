@@ -83,9 +83,9 @@ VALUES
 ('ME000008', 'Taric', 'Victoria Road', '34566',	'Newport', 'Wales', 'United Kingdom', 'M', '20021217', '20201231'),
 ('ME000009', 'Qiyana', 'Jalan Bukit Bintang', '52100', 'Kuala Lumpur', 'Kuala Lumpur', 'Malaysia', 'F',	'20020108',	'20201112'),
 ('ME000010', 'Rell', 'Place de Miremont', '92390', 'Villeneuve', 'lle-de-France', 'France',	'F', '20000911', '20210526'),
-('ME000011', 'Jeremy', 'Kung Yip Street', '23482', 'Kwai Tsing District', 'Hong Kong', 'Hong Kong',	'M', '19960415', '20210431'),
+('ME000011', 'Jeremy', 'Kung Yip Street', '23482', 'Kwai Tsing District', 'Hong Kong', 'Hong Kong',	'M', '19960415', '20210429'),
 ('ME000012', 'Tris Jenner',	'Soi Phyanark Phetburi Road', '10400', 'Phayathai',	'Bangkok', 'Thailand', 'F', '20030708', '20210517'),
-('ME000013', 'Kayle Lim', 'Levent',	'38473', 'Besiktas', 'Istanbul', 'Turkey', 'F',	'19990431', '20200623'),
+('ME000013', 'Kayle Lim', 'Levent',	'38473', 'Besiktas', 'Istanbul', 'Turkey', 'F',	'19990429', '20200623'),
 ('ME000014', 'Sivades',	'Raffles Place', '48623', 'Singapore', 'Singapore',	'Singapore', 'M', '20010420', '20210124'),
 ('ME000015', 'Fiora Yu', 'Proctor Place', '20222', 'Mangere Bridge', 'Manukau',	'New Zealand', 'F',	'20020831', '20210228');
 
