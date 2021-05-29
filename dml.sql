@@ -31,9 +31,9 @@ GROUP BY P.Pub_ID, P.Pub_Name;
 
 
 -- 5.	Find the total number of books ordered by each member.
-SELECT Member_ID, SUM(MemOrder_Quantity) AS 'Total Number of Books Ordered'
-FROM [MEMBER ORDER]
-GROUP BY Member_ID
+SELECT O.Member_ID, SUM(B.MemOrder_Quantity) AS 'Total Number of Books Ordered'
+FROM [MEMBER ORDER] O INNER JOIN BOOK_MEMBER_ORDER B ON O.MemOrder_ID = B.MemOrder_ID  
+GROUP BY O.Member_ID
 
 
 -- 6.   Find the bestselling book(s).
@@ -46,8 +46,8 @@ GROUP BY O.Book_ID, U.Book_Title ORDER BY SUM(O.MemOrder_Quantity) DESC
 -- 7.   Show list of total customers based on gender who are registered as members in APU E-Bookstore. 
 --      The list should show total number of registered members and total number of gender (Male and female).
 SELECT COUNT(Member_ID) AS 'Total Registered Member',
-(SELECT COUNT(Member_ID) FROM MEMBER WHERE Gender = 'F') AS 'Female Member',
-(SELECT COUNT(Member_ID) FROM MEMBER WHERE Gender = 'M') AS 'Male Member'
+(SELECT COUNT(Member_ID) FROM MEMBER WHERE Gender = 'M') AS 'Male Member',
+(SELECT COUNT(Member_ID) FROM MEMBER WHERE Gender = 'F') AS 'Female Member'
 FROM MEMBER
 
 -- 8 Show a list of purchased books that have not been delivered to members. The list should show member identification number, address, contact number, book serial number, book title, quantity, date and status of delivery.
