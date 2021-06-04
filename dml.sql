@@ -12,26 +12,20 @@ ORDER BY AVG(MF.Rating) DESC;
 CREATE VIEW Rating AS
 SELECT B.Book_ID, U.Book_Title, AVG(MF.Rating) AS Rating
 FROM BOOK B
-JOIN [MEMBER FEEDBACK] MF
+INNER JOIN [MEMBER FEEDBACK] MF
 ON B.Book_ID = MF.Book_ID
-JOIN UNIVERSAL_BOOK U
+INNER JOIN UNIVERSAL_BOOK U
 ON B.Book_ISBN = U.Book_ISBN
 GROUP BY B.Book_ID, U.Book_Title;
 
-SELECT DISTINCT B.Book_ID, U.Book_Title, R.Rating
-FROM BOOK B
-JOIN [MEMBER FEEDBACK] MF
-ON B.Book_ID = MF.Book_ID
-JOIN UNIVERSAL_BOOK U
-ON B.Book_ISBN = U.Book_ISBN
-JOIN Rating R
-ON B.Book_ID = R.Book_ID
-WHERE R.Rating = (SELECT MAX(Rating) FROM Rating);
+SELECT DISTINCT Book_ID, Book_Title, Rating
+FROM Rating
+WHERE Rating = (SELECT MAX(Rating) FROM Rating);
 
 -- 2.	Find the total number of feedback per member. Show member id, member name, and total number of feedback per member.
 SELECT M.Member_ID, M.Member_Name, COUNT(MF.Feedback_ID) AS 'Total Feedback'
 FROM MEMBER M
-JOIN [MEMBER FEEDBACK] MF
+INNER JOIN [MEMBER FEEDBACK] MF
 ON M.Member_ID = MF.Member_ID
 GROUP BY M.Member_ID, M.Member_Name;
 
@@ -42,10 +36,12 @@ FROM PUBLISHER P;
 
 
 -- 4.	Find the total number of books ordered by store manager from each publisher.
-SELECT P.Pub_ID, P.Pub_Name, SUM(BO.Order_Quantity) AS 'Total Books Ordered'
+SELECT P.Pub_ID, P.Pub_Name, SUM(BMO.Order_Quantity) AS 'Total Books Ordered'
 FROM [BOOKSTORE ORDER] BO
-JOIN PUBLISHER P
+INNER JOIN PUBLISHER P
 ON BO.Pub_ID = P.Pub_ID
+INNER JOIN BOOK_BOOKSTORE_ORDER BMO
+ON BO.Order_ID = BMO.Order_ID
 GROUP BY P.Pub_ID, P.Pub_Name;
 
 
