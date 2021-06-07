@@ -9,6 +9,7 @@ GROUP BY B.Book_ID, U.Book_Title
 ORDER BY AVG(MF.Rating) DESC;
 
 -- Or
+
 CREATE VIEW Rating AS
 SELECT B.Book_ID, U.Book_Title, AVG(MF.Rating) AS Rating
 FROM BOOK B
@@ -34,6 +35,14 @@ GROUP BY M.Member_ID, M.Member_Name;
 SELECT P.Pub_ID, P.Pub_Name, P.Pub_Qty
 FROM PUBLISHER P;
 
+-- Or
+
+-- Count all books in bookstore group by publisher
+SELECT P.Pub_ID, P.Pub_Name, COUNT(B.Book_ID) AS 'Total book published'
+FROM BOOK B
+INNER JOIN PUBLISHER P
+ON B.Pub_ID = P.Pub_ID
+GROUP BY P.Pub_ID, P.Pub_Name
 
 -- 4.	Find the total number of books ordered by store manager from each publisher.
 SELECT P.Pub_ID, P.Pub_Name, SUM(BMO.Order_Quantity) AS 'Total Books Ordered'
