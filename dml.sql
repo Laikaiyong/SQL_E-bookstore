@@ -98,7 +98,7 @@ ORDER BY SUM(MO.MemOrder_Price) DESC;
 
 
 -- 10.	Show a list of total books as added by each members in the shopping cart.
-SELECT SC.Member_ID, M.Member_Name, COUNT(BSC.Purchase_Quantity) AS 'Total books added'
+SELECT SC.Member_ID, M.Member_Name, SUM(BSC.Purchase_Quantity) AS 'Total books added'
 FROM [SHOPPING CART] SC INNER JOIN BOOK_SHOPPING_CART BSC ON SC.Purchase_ID = BSC.Purchase_ID
 INNER JOIN MEMBER M ON M.Member_ID = SC.Member_ID
 INNER JOIN BOOK B ON B.Book_ID = BSC.Book_ID
