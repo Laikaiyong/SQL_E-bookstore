@@ -64,6 +64,17 @@ FROM [MEMBER ORDER] MO INNER JOIN BOOK_MEMBER_ORDER BMO ON MO.MemOrder_ID = BMO.
 GROUP BY MO.Member_ID;
 
 
+SELECT M.Member_ID, SUM(SP.MemOrder_Quantity) AS 'Total Books Ordered'
+FROM MEMBER M
+LEFT JOIN (
+    SELECT MO.Member_ID, MO.MemOrder_ID, BMO.MemOrder_Quantity 
+    FROM [MEMBER ORDER] MO
+    INNER JOIN BOOK_MEMBER_ORDER BMO
+    ON MO.MemOrder_ID = BMO.MemOrder_ID
+    WHERE Payment_Status = 'Completed') AS SP
+ON M.Member_ID = SP.Member_ID
+GROUP BY M.Member_ID;
+
 -- 6.   Find the bestselling book(s).
 SELECT TOP 5 BMO.Book_ID, UB.Book_Title, SUM(BMO.MemOrder_Quantity) AS 'Sales'
 FROM BOOK_MEMBER_ORDER BMO INNER JOIN BOOK B ON BMO.Book_ID = B.Book_ID
