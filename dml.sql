@@ -2,9 +2,9 @@
 -- 1.	List the book(s) which has the highest rating. Show book id, book name, and the rating.
 SELECT TOP 1 B.Book_ID, U.Book_Title, AVG(MF.Rating) AS Rating
 FROM BOOK B
-JOIN [MEMBER FEEDBACK] MF
+INNER JOIN [MEMBER FEEDBACK] MF
 ON B.Book_ID = MF.Book_ID
-JOIN UNIVERSAL_BOOK U
+INNER JOIN UNIVERSAL_BOOK U
 ON B.Book_ISBN = U.Book_ISBN
 GROUP BY B.Book_ID, U.Book_Title
 ORDER BY AVG(MF.Rating) DESC;
@@ -27,7 +27,7 @@ WHERE Rating = (SELECT MAX(Rating) FROM Rating);
 -- 2.	Find the total number of feedback per member. Show member id, member name, and total number of feedback per member.
 SELECT M.Member_ID, M.Member_Name, COUNT(MF.Feedback_ID) AS 'Total Feedback'
 FROM MEMBER M
-INNER JOIN [MEMBER FEEDBACK] MF
+LEFT JOIN [MEMBER FEEDBACK] MF
 ON M.Member_ID = MF.Member_ID
 GROUP BY M.Member_ID, M.Member_Name;
 
@@ -42,18 +42,19 @@ FROM PUBLISHER P;
 -- Count all books in bookstore group by publisher
 SELECT P.Pub_ID, P.Pub_Name, COUNT(B.Book_ID) AS 'Total book published'
 FROM BOOK B
-INNER JOIN PUBLISHER P
+RIGHT JOIN PUBLISHER P
 ON B.Pub_ID = P.Pub_ID
 GROUP BY P.Pub_ID, P.Pub_Name;
 
 -- 4.	Find the total number of books ordered by store manager from each publisher.
 SELECT P.Pub_ID, P.Pub_Name, SUM(BMO.Order_Quantity) AS 'Total Books Ordered'
 FROM [BOOKSTORE ORDER] BO
-INNER JOIN PUBLISHER P
+RIGHT JOIN PUBLISHER P
 ON BO.Pub_ID = P.Pub_ID
-INNER JOIN BOOK_BOOKSTORE_ORDER BMO
+FULL JOIN BOOK_BOOKSTORE_ORDER BMO
 ON BO.Order_ID = BMO.Order_ID
-GROUP BY P.Pub_ID, P.Pub_Name;
+GROUP BY P.Pub_ID, P.Pub_Name
+ORDER BY Pub_ID ASC;
 
 
 -- Cheong Sheng Kui
