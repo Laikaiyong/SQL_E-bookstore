@@ -59,11 +59,6 @@ ORDER BY Pub_ID ASC;
 
 -- Cheong Sheng Kui
 -- 5.	Find the total number of books ordered by each member.
-SELECT MO.Member_ID, SUM(BMO.MemOrder_Quantity) AS 'Total Books Ordered'
-FROM [MEMBER ORDER] MO INNER JOIN BOOK_MEMBER_ORDER BMO ON MO.MemOrder_ID = BMO.MemOrder_ID  
-GROUP BY MO.Member_ID;
-
-
 SELECT M.Member_ID, SUM(SP.MemOrder_Quantity) AS 'Total Books Ordered'
 FROM MEMBER M
 LEFT JOIN (
