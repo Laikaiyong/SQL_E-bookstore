@@ -47,12 +47,15 @@ ON B.Pub_ID = P.Pub_ID
 GROUP BY P.Pub_ID, P.Pub_Name;
 
 -- 4.	Find the total number of books ordered by store manager from each publisher.
-SELECT P.Pub_ID, P.Pub_Name, SUM(BMO.Order_Quantity) AS 'Total Books Ordered'
-FROM [BOOKSTORE ORDER] BO
+SELECT P.Pub_ID, P.Pub_Name, SUM(SUB.Order_Quantity) AS 'Total Books Ordered'
+FROM (
+    SELECT BO.Pub_ID, BMO.Order_Quantity
+    FROM [BOOKSTORE ORDER] BO
+    INNER JOIN BOOK_BOOKSTORE_ORDER BMO
+    ON BO.Order_ID = BMO.Order_ID
+    WHERE BO.Order_Status = 'Completed') SUB
 RIGHT JOIN PUBLISHER P
-ON BO.Pub_ID = P.Pub_ID
-FULL JOIN BOOK_BOOKSTORE_ORDER BMO
-ON BO.Order_ID = BMO.Order_ID
+ON SUB.Pub_ID = P.Pub_ID
 GROUP BY P.Pub_ID, P.Pub_Name
 ORDER BY Pub_ID ASC;
 
