@@ -24,11 +24,11 @@ FROM (
     WHERE UB.Book_Genre = 'Coding' AND MF.Rating >= 5)SUB;
 
 
-SELECT B.Book_ID, UB.Book_Genre, MF.Rating, AVG(B.Book_Price) AS 'Average Price'
-FROM BOOK B INNER JOIN UNIVERSAL_BOOK UB ON B.Book_ISBN = UB.Book_ISBN
-INNER JOIN [MEMBER FEEDBACK] MF ON B.Book_ID = MF.Book_ID
-GROUP BY B.Book_ID, UB.Book_Genre, MF.Rating
-WHERE UB.Genre = 'Coding' AND MF.Rating >= 5);
+--SELECT B.Book_ID, UB.Book_Genre, MF.Rating, AVG(B.Book_Price) AS 'Average Price'
+--FROM BOOK B INNER JOIN UNIVERSAL_BOOK UB ON B.Book_ISBN = UB.Book_ISBN
+--INNER JOIN [MEMBER FEEDBACK] MF ON B.Book_ID = MF.Book_ID
+--GROUP BY B.Book_ID, UB.Book_Genre, MF.Rating
+--WHERE UB.Genre = 'Coding' AND MF.Rating >= 5);
 
 -- LIM WYE YEE
 --List the names of all publishers who had published any books with the letter 's' in its title/name. - Lim
